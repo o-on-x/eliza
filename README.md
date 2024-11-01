@@ -32,8 +32,8 @@ https://pnpm.io/installation
 - Check out the file `src/core/defaultCharacter.ts` - you can modify this
 - You can also load characters with the `node --loader ts-node/esm src/index.ts --characters="path/to/your/character.json"` and run multiple bots at the same time.
 
-### Run with Llama
-You can run Llama 70B or 405B models by setting the `XAI_MODEL` environment variable to `meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo` or `meta-llama/Meta-Llama-3.1-405B-Instruct`
+### Run with Ollama
+You can run with any Ollama model locally ie Hermes 3 8b, llama3.2 Llama 70B or 405B by setting the `XAI_MODEL` environment variable to the models name ie `llama3.2` `
 
 ### Run with Grok
 You can run Grok models by setting the `XAI_MODEL` environment variable to `grok-beta`
@@ -48,6 +48,11 @@ If you are getting strange issues when starting up, make sure you're using Node 
 You may need to install Sharp. If you see an error when starting up, try installing it with the following command:
 ```
 pnpm install --include=optional sharp
+```
+
+# Run
+```
+pnpm start
 ```
 
 # Environment Setup
@@ -68,20 +73,18 @@ TWITTER_COOKIES= # Account cookies
 
 # Local Setup
 
-## CUDA Setup
+## Ollama Setup
 
-If you have an NVIDIA GPU, you can install CUDA to speed up local inference dramatically.
-```
-pnpm install
-npx --no node-llama-cpp source download --gpu cuda
-```
+If you have an NVIDIA GPU, Make sure that you've installed the CUDA Toolkit, including cuDNN and cuBLAS to speed up local inference dramatically
 
-Make sure that you've installed the CUDA Toolkit, including cuDNN and cuBLAS.
+```
+curl -fsSL https://ollama.com/install.sh | sh
+ollama start
+ollama pull "modelname"
+```
 
 ## Running locally
-Add XAI_MODEL and set it to one of the above options from [Run with
-Llama](#run-with-llama) - you can leave X_SERVER_URL and XAI_API_KEY blank, it
-downloads the model from huggingface and queries it locally
+Add XAI_MODEL and set it to whatever models you have pulled in with Ollama  - you can leave X_SERVER_URL and XAI_API_KEY blank
 
 # Cloud Setup (with OpenAI)
 
@@ -109,3 +112,5 @@ ELEVENLABS_OUTPUT_FORMAT=pcm_16000
 
 # Discord Bot
 For help with setting up your Discord Bot, check out here: https://discordjs.guide/preparations/setting-up-a-bot-application.html
+
+
